@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Season from '@/components/Season'
+import List from '@/components/List'
+import Detail from '@/components/Detail'
 
 Vue.use(Router)
 
@@ -15,8 +16,13 @@ export default new Router({
     },
     {
       path: '/:year/:season',
-      name: 'Season',
-      component: Season
+      name: 'List',
+      component: List
+    },
+    {
+      path: '/anime/:id/:title',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })

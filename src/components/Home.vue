@@ -3,7 +3,7 @@
     <div class="header">
       <div class="search-title">
         <span>
-          Nusanime
+          Zeronime
         </span>
       </div> 
     </div>

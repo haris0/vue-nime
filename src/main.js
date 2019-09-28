@@ -5,7 +5,9 @@ import {  Input,
           Col,
           Row,
           Card,
-          Select} from 'ant-design-vue';
+          Select,
+          Tag,
+          List} from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css'
 import underscore from 'vue-underscore';
 
@@ -14,6 +16,8 @@ Vue.use(Col);
 Vue.use(Row);
 Vue.use(Card);
 Vue.use(Select);
+Vue.use(Tag);
+Vue.use(List);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

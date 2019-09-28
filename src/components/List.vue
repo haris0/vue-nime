@@ -14,18 +14,15 @@
         <div class="list">
           <a-row style="top: 50px;">
             <a-col :xs="12" :md="8" :xl="4" v-for="anim in list" :key="anim.mal_id" style="padding:10px">
-              <a-card
-                hoverable
-              >
+              <a-card hoverable @click="goToAnimDetail(anim)">
                 <img
                   alt="example"
                   :src="anim.image_url"
                   slot="cover"
-                  class="img-cov"
-                />
-                <a-card-meta style="font-size: 12px;"
+                  class="img-cov"/>
+                <a-card-meta
                   :title="anim.title">
-                  <template slot="description" >Source • {{anim.source}}</template>
+                  <template slot="description" >{{anim.source}}</template>
                 </a-card-meta>
               </a-card>
             </a-col>
@@ -74,6 +71,14 @@
           }catch(error){
             console.log(error.response);
           }
+      },
+      goToAnimDetail: function(anim){
+        console.log(anim)
+        var urlTitle = self.convertToUrlTitle(anim.title)
+        this.$router.push('/anime/'+anim.mal_id+'/'+urlTitle)
+      },
+      convertToUrlTitle: function(title){
+        return title.toLowerCase().split(' ').join('-')
       }
     }
   }
