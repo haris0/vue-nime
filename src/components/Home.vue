@@ -18,14 +18,15 @@
     </div>
     <div class="sesion">
       <a-row style="top: 50px;">
-        <a-col :xs="12" :xl="6" style="padding:10px" v-for="ses in session" v-bind:key="ses.ses">
-          <a-card hoverable class="card-ses">
-            <div slot="cover" :style="'height :100px;background:'+ses.color">
-
-            </div>
+        <a-col :xs="12" :xl="6" style="padding:10px" v-for="sea in season" v-bind:key="sea.sea">
+          <a-card 
+            hoverable 
+            class="card-sea" 
+            @click="goToSeason(sea)">
+            <div slot="cover" :style="'height :100px;background:'+sea.color"></div>
             <a-card-meta
-              :title="ses.ses">
-              <template slot="description">{{ses.year}}</template>
+              :title="sea.sea">
+              <template slot="description">{{sea.year}}</template>
             </a-card-meta>
           </a-card>
         </a-col>
@@ -46,24 +47,24 @@
     mounted(){
     },
     data:()=>({
-      session : [
+      season : [
         {
-          ses : "Winter",
+          sea : "Winter",
           year: 2019,
           color : "#535c68"
         },
         {
-          ses : "Spring",
+          sea : "Spring",
           year: 2019,
           color : "#22a6b3"
         },
         {
-          ses : "Summer",
+          sea : "Summer",
           year: 2019,
           color : "#eb4d4b"
         },
         {
-          ses : "Fall",
+          sea : "Fall",
           year: 2019,
           color : "#f9ca24"
         }
@@ -75,6 +76,10 @@
     methods:{
       onSearch: function(){
 
+      },
+      goToSeason: function(season){
+        console.log(season)
+        this.$router.push('/'+season.year+'/'+season.sea)
       }
     }
   }
