@@ -10,7 +10,10 @@ import {  Input,
           List} from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css'
 import underscore from 'vue-underscore';
+import VueYoutube from 'vue-youtube'
 
+Vue.use(VueYoutube);
+Vue.use(underscore);
 Vue.use(Input);
 Vue.use(Col);
 Vue.use(Row);

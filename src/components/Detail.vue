@@ -1,53 +1,59 @@
 <template>
   <div class="container">
     <div class="header"></div>
-      <div>
-        <a-card style="background: #f5f5f5;">
-          <div class="cov-img"
-            slot="cover">
-            <img style=""
-            :src="animeDetail.image_url"
-            class="img-cov"/>
-            
-          </div> 
-          <a-card-meta
-            :title="animeDetail.title">
-            <template slot="description">{{animeDetail.synopsis}}</template>
-          </a-card-meta>
-          <div style="margin-top: 10px;">
-            <span style="font-weight: bold;margin-bottom:5px;">Genres :</span>
-            <br>
-            <a-tag v-for="genre in animeDetail.genres" :key="genre.mal_id">{{genre.name}}</a-tag>
-          </div>
-        </a-card>
-      </div> 
-      <div class="char-cont">
-        <span class="sub-title">Characters</span>
-          <div>
-            <a-row :gutter="24">
-              <a-col :xs="24" :xl="12" v-for="char in characters" :key="char.mal_id">
-                <a-card style="margin: 20px 0px 0px;display: flex;background: #f5f5f5;">
-                  <img
-                    alt="example"
-                    :src="char.image_url"
-                    slot="cover"
-                    class="img-char"/>
-                  <div style="margin: -15px">
-                    <span style=";font-size: 18px;font-weight: bold;">{{char.name}}</span>
-                    <br>
-                    <span v-for="cast in char.voice_actors.slice(0,1)" :key="cast.mal_id" >{{cast.name}}</span>
-                    <br>
-                    <span>{{char.role}}</span>
-                  </div>
-                </a-card>
-              </a-col>
-            </a-row>
-          </div>
-      </div>
-      <div class="char-cont">
-        <span class="sub-title">Trailer</span>
-        <video ref="videoRef" src="" id="video-container" style="margin: 20px 0px 0px;" width="100%" controls></video>
-      </div>
+    <div>
+      <a-card style="background: #f5f5f5;">
+        <div class="cov-img"
+          slot="cover">
+          <img style=""
+          :src="animeDetail.image_url"
+          class="img-cov"/>
+          
+        </div> 
+        <a-card-meta
+          :title="animeDetail.title">
+          <template slot="description">{{animeDetail.synopsis}}</template>
+        </a-card-meta>
+        <div style="margin-top: 10px;">
+          <span style="font-weight: bold;margin-bottom:5px;">Genres :</span>
+          <br>
+          <a-tag v-for="genre in animeDetail.genres" :key="genre.mal_id">{{genre.name}}</a-tag>
+        </div>
+      </a-card>
+    </div> 
+    <div class="char-cont">
+      <span class="sub-title">Characters</span>
+        <div>
+          <a-row :gutter="24">
+            <a-col :xs="24" :xl="12" v-for="char in characters" :key="char.mal_id">
+              <a-card style="margin: 20px 0px 0px;display: flex;background: #f5f5f5;">
+                <img
+                  alt="example"
+                  :src="char.image_url"
+                  slot="cover"
+                  class="img-char"/>
+                <div style="margin: -15px">
+                  <span style=";font-size: 18px;font-weight: bold;">{{char.name}}</span>
+                  <br>
+                  <span v-for="cast in char.voice_actors.slice(0,1)" :key="cast.mal_id" >{{cast.name}}</span>
+                  <br>
+                  <span>{{char.role}}</span>
+                </div>
+              </a-card>
+            </a-col>
+          </a-row>
+        </div>
+    </div>
+    <div class="char-cont">
+      <span class="sub-title">Trailer</span>
+      <div style="margin: 20px 0px 0px;">
+        <a-row>
+          <a-col :xs="24" :xl="12">
+            <youtube :fitParent="fitPer" :video-id="ytId" @playing="playing"></youtube>
+          </a-col>
+        </a-row>
+      </div>        
+    </div>
   </div>
 </template>
 
@@ -66,13 +72,13 @@
       self.id = self.$route.params.id;
       self.getDetail();
       self.getCast();
-      this.$refs.videoRef.src = "https://www.youtube.com/embed/2ei4KpfCOAI?enablejsapi=1&wmode=opaque";
-      this.$refs.videoRef.play();
     },
     data:()=>({
       id:0,
       animeDetail : {},
-      characters : []
+      characters : [],
+      fitPer : true,
+      ytId : ""
     }),
     computed: {     
     },
@@ -82,6 +88,7 @@
             let response = await config.HTTP.get(config.getDetail+self.id)
             console.log(response)
             self.animeDetail = response.data;
+            self.ytId = self.getYtId(self.animeDetail.trailer_url)
           }catch(error){
             console.log(error.response);
           }
@@ -96,6 +103,12 @@
           console.log(error.response);
         }
       },
+      playing:function() {
+        console.log('\o/ we are watching!!!')
+      },
+      getYtId: function (url) {
+        return self.$youtube.getIdFromUrl(url)
+      }
     }
   }
 
