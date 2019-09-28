@@ -9,11 +9,12 @@
     </div>
     <div class="con-search">
       <div class="search">
-        <a-input-search
-          size="large"
-          placeholder="input search text"
-          @search="onSearch"
-        />
+        <a-input-group compact>
+          <a-select style="width: 100%" defaultValue="Home">
+            <a-select-option value="Home">2019</a-select-option>
+            <a-select-option value="Company">2018</a-select-option>
+          </a-select>
+        </a-input-group>
       </div>
     </div>
     <div class="sesion">
@@ -26,7 +27,7 @@
             <div slot="cover" :style="'height :100px;background:'+sea.color"></div>
             <a-card-meta
               :title="sea.sea">
-              <template slot="description">{{sea.year}}</template>
+              <template slot="description">{{year}}</template>
             </a-card-meta>
           </a-card>
         </a-col>
@@ -45,30 +46,28 @@
       self = this;  
     },
     mounted(){
+      self.year = self.getYears();
     },
     data:()=>({
       season : [
         {
           sea : "Winter",
-          year: 2019,
           color : "#535c68"
         },
         {
           sea : "Spring",
-          year: 2019,
           color : "#22a6b3"
         },
         {
           sea : "Summer",
-          year: 2019,
           color : "#eb4d4b"
         },
         {
           sea : "Fall",
-          year: 2019,
           color : "#f9ca24"
         }
-      ]
+      ],
+      year : 0
     }),
     computed: {
      
@@ -79,7 +78,12 @@
       },
       goToSeason: function(season){
         console.log(season)
-        this.$router.push('/'+season.year+'/'+season.sea)
+        this.$router.push('/'+self.year+'/'+season.sea)
+      },
+      getYears: function(){
+        var today = new Date();
+        var year = today.getFullYear();
+        return year;
       }
     }
   }

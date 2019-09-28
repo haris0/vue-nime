@@ -4,13 +4,16 @@ import router from './router'
 import {  Input,
           Col,
           Row,
-          Card} from 'ant-design-vue';
+          Card,
+          Select} from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css'
+import underscore from 'vue-underscore';
 
 Vue.use(Input);
 Vue.use(Col);
 Vue.use(Row);
 Vue.use(Card);
+Vue.use(Select);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
