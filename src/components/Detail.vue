@@ -15,9 +15,9 @@
           <template slot="description">{{animeDetail.synopsis}}</template>
         </a-card-meta>
         <div style="margin-top: 10px;">
-          <span style="font-weight: bold;margin-bottom:5px;">Genres :</span>
+          <span class="gen-title">Genres :</span>
           <br>
-          <a-tag v-for="genre in animeDetail.genres" :key="genre.mal_id">{{genre.name}}</a-tag>
+          <a-tag class="anim-tag" v-for="genre in animeDetail.genres" :key="genre.mal_id">{{genre.name}}</a-tag>
         </div>
       </a-card>
     </div> 
@@ -26,14 +26,14 @@
         <div>
           <a-row :gutter="24">
             <a-col :xs="24" :xl="12" v-for="char in characters" :key="char.mal_id">
-              <a-card style="margin: 20px 0px 0px;display: flex;background: #f5f5f5;">
+              <a-card class="anim-cov">
                 <img
-                  alt="example"
+                  :alt="char.name"
                   :src="char.image_url"
                   slot="cover"
                   class="img-char"/>
                 <div style="margin: -15px">
-                  <span style=";font-size: 18px;font-weight: bold;">{{char.name}}</span>
+                  <span class="anim-title">{{char.name}}</span>
                   <br>
                   <span v-for="cast in char.voice_actors.slice(0,1)" :key="cast.mal_id" >{{cast.name}}</span>
                   <br>
@@ -136,6 +136,22 @@
   }
   .img-char{
     width: 60px;
+  }
+  .gen-title{
+    font-weight: bold;
+    margin-bottom:5px; 
+  }
+  .anim-cov{
+    margin: 20px 0px 0px;
+    display: flex;
+    background: #f5f5f5;
+  }
+  .anim-title{
+    font-size: 18px;
+    font-weight: bold;
+  } 
+  .anim-tag{
+    margin: 10px 10px 0px 0px;
   }
   @media (max-width: 600px) {
     .cov-img{

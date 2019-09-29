@@ -16,7 +16,7 @@
             <a-col :xs="12" :md="8" :xl="4" v-for="anim in list" :key="anim.mal_id" style="padding:10px">
               <a-card hoverable @click="goToAnimDetail(anim)">
                 <img
-                  alt="example"
+                  :alt="anim.title"
                   :src="anim.image_url"
                   slot="cover"
                   class="img-cov"/>
@@ -123,15 +123,15 @@
   .ant-card >>> .ant-card-body{
     padding: 15px;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 400px) {
     .img-cov{
-      height: 30vh;
+      height: 25vh;
     }
   }
 
-  @media (max-width: 1024px) and (min-width: 601px) {
+  @media (max-width: 1024px) and (min-width:400px) {
     .img-cov{
-      height: 35vh;
+      height: 30vh;
     }
   }
 

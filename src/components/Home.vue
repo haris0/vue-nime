@@ -9,10 +9,9 @@
     </div>
     <div class="con-search">
       <div class="search">
-        <a-input-group compact>
-          <a-select style="width: 100%" defaultValue="Home">
-            <a-select-option value="Home">2019</a-select-option>
-            <a-select-option value="Company">2018</a-select-option>
+        <a-input-group size="large" compact>
+          <a-select size="large" style="width: 100%" :defaultValue="years[0]" v-model="year">
+            <a-select-option v-for="tahun in years" :key="tahun" :value="tahun">{{tahun}}</a-select-option>
           </a-select>
         </a-input-group>
       </div>
@@ -21,13 +20,14 @@
       <a-row style="top: 50px;">
         <a-col :xs="12" :xl="6" style="padding:10px" v-for="sea in season" v-bind:key="sea.sea">
           <a-card 
-            hoverable 
+            hoverable
             class="card-sea" 
             @click="goToSeason(sea)">
-            <div slot="cover" :style="'height :100px;background:'+sea.color"></div>
+            <div slot="cover" :style="'height :100px;background:'+sea.color">
+              <span class="ses-title">{{sea.sea}}</span>
+            </div>
             <a-card-meta
-              :title="sea.sea">
-              <template slot="description">{{year}}</template>
+              :title="year">
             </a-card-meta>
           </a-card>
         </a-col>
@@ -47,6 +47,7 @@
     },
     mounted(){
       self.year = self.getYears();
+      self.generateYear()
     },
     data:()=>({
       season : [
@@ -67,7 +68,8 @@
           color : "#f9ca24"
         }
       ],
-      year : 0
+      year : 0,
+      years : [],
     }),
     computed: {
      
@@ -84,6 +86,14 @@
         var today = new Date();
         var year = today.getFullYear();
         return year;
+      },
+      generateYear: function(){
+        let year = self.getYears()
+        for(var i = 0; i<5; i++){
+          self.years.push(year)
+          year--
+        }
+        console.log(self.years)
       }
     }
   }
@@ -125,5 +135,11 @@
     position: fixed;
     bottom: 0;
     width: 100%;
+  }
+  .ses-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: white; 
+    line-height: 4.5;  
   }
 </style>
