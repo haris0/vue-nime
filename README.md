@@ -4,11 +4,11 @@ Application to display anime list for each season, the API used is provided by J
 
 
 ## Preview
-![page1](./src/assets/Zero0.PNG)
+![page1](./src/assets/Zero0.png)
 
-![page2](./src/assets/Zero1.PNG)
+![page2](./src/assets/Zero1.png)
 
-![page3](./src/assets/Zero2.PNG)
+![page3](./src/assets/Zero2.png)
 
 ## Build Setup
 
