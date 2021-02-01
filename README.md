@@ -1,6 +1,6 @@
 # vue-nusa
 
-Application to display anime list for each season, the API used is provided by Jikan, more detail let's check [Jikan](https://jikan.docs.apiary.io/). This project was developed using Vue Js. You can see the demo application at [Zeronime](https://vuenime.surge.sh/)
+Application to display anime list for each season, the API used is provided by Jikan, more detail let's check [Jikan](https://jikan.docs.apiary.io/). This project was developed using Vue Js. You can see the demo application at [Zeronime](https://vue-nime.netlify.app/)
 
 
 ## Preview
